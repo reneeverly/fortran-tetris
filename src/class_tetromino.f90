@@ -1,4 +1,5 @@
 module class_tetromino
+   implicit none
    type :: tetromino
       integer :: color
       integer, dimension(2) :: center
@@ -13,7 +14,6 @@ module class_tetromino
       procedure :: go_right => tetromino_go_right
       procedure :: go_down => tetromino_go_down
       procedure :: go_up => tetromino_go_up
-      procedure :: check_intersection => tetromino_check_intersection
    end type
    interface tetromino
       procedure constructor
@@ -127,6 +127,7 @@ contains
    end subroutine
    subroutine tetromino_unrotate(this)
       class(tetromino) :: this
+      integer :: swapper
 
       swapper = this%block1(2)
       this%block1(2) = this%block1(1)
@@ -160,7 +161,4 @@ contains
       class(tetromino) :: this
       this%center(2) = this%center(2) - 1
    end subroutine
-   function tetromino_check_intersection(this)
-      class(tetromino) :: this
-   end function
 end module
